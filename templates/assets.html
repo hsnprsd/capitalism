@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+</head>
+<body>
+<ul class="links">
+    <li><a href="/">Dashboard</a></li>
+    <li><a href="/categories">Categories</a></li>
+    <li><a href="/assets">Assets</a></li>
+</ul>
+<div class="update-assets">
+    <form action="/assets/update" method="POST">
+        <select name="category_id">
+            {% for category in categories %}
+            <option value="{{category.id}}">{{category.name}}</option>
+            {% endfor %}
+        </select>
+        <input type="number" name="amount" placeholder="Amount">
+        <input type="checkbox" name="delta" value="Delta?" checked> Delta?
+        <input type="submit" value="Update">
+    </form>
+</div>
+<div class="assets">
+    <table>
+        <thead>
+        <th>Category</th>
+        <th>Amount</th>
+        <th>Worth</th>
+        </thead>
+        <tbody>
+        {% for asset in assets %}
+        <tr>
+            <td>{{asset.category.name}}</td>
+            <td>{{asset.amount}}</td>
+            <td>{{asset_worths[asset.id]}} tomans</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
